@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X TECH Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-dashboard.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar Navigation -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h1>X TECH</h1>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-text">Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-section="server-status">
+                    <span class="nav-icon">🖥️</span>
+                    <span class="nav-text">Server Status</span>
+                </a>
+                <a href="#" class="nav-item" data-section="analytics">
+                    <span class="nav-icon">📈</span>
+                    <span class="nav-text">Analytics</span>
+                </a>
+                <a href="#" class="nav-item" data-section="sales">
+                    <span class="nav-icon">💰</span>
+                    <span class="nav-text">Sales & Revenue</span>
+                </a>
+                <a href="#" class="nav-item" data-section="orders">
+                    <span class="nav-icon">📦</span>
+                    <span class="nav-text">Orders</span>
+                </a>
+                <a href="#" class="nav-item" data-section="users">
+                    <span class="nav-icon">👥</span>
+                    <span class="nav-text">Users</span>
+                </a>
+                <a href="#" class="nav-item" data-section="forms">
+                    <span class="nav-icon">📝</span>
+                    <span class="nav-text">Form Submissions</span>
+                </a>
+                <a href="#" class="nav-item" data-section="activity">
+                    <span class="nav-icon">🔔</span>
+                    <span class="nav-text">Recent Activity</span>
+                </a>
+                <a href="#" class="nav-item" data-section="api-testing">
+                    <span class="nav-icon">🔧</span>
+                    <span class="nav-text">API Testing</span>
+                </a>
+            </nav>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <div class="content-header">
+                <h2 id="section-title">Dashboard Overview</h2>
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="refreshData()">Refresh All</button>
+                </div>
+            </div>
+
+            <div class="content-body">
+                <!-- Dashboard Section -->
+                <div id="dashboard-section" class="section active">
+                    <div class="dashboard-overview">
+                        <div class="overview-card">
+                            <h3>Server Health</h3>
+                            <div class="overview-stat">
+                                <span class="stat-value" id="overview-health">Healthy</span>
+                                <span class="stat-label">System Status</span>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Total Visitors</h3>
+                            <div class="overview-stat">
+                                <span class="stat-value" id="overview-visitors">0</span>
+                                <span class="stat-label">Today</span>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Revenue</h3>
+                            <div class="overview-stat">
+                                <span class="stat-value" id="overview-revenue">$0</span>
+                                <span class="stat-label">This Month</span>
+                            </div>
+                        </div>
+                        <div class="overview-card">
+                            <h3>Active Orders</h3>
+                            <div class="overview-stat">
+                                <span class="stat-value" id="overview-orders">0</span>
+                                <span class="stat-label">In Progress</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-chart">
+                        <h3>Recent Activity Summary</h3>
+                        <div class="activity-summary">
+                            <div class="summary-item">
+                                <span class="summary-label">Form Submissions</span>
+                                <span class="summary-value">23 today</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">New Users</span>
+                                <span class="summary-value">8 today</span>
+                            </div>
+                            <div class="summary-item">
+                                <span class="summary-label">Orders</span>
+                                <span class="summary-value">3 pending</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Server Status Section -->
+                <div id="server-status-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>System Health</h3>
+                            <div class="stat">
+                                <span>Health Status:</span>
+                                <span class="stat-value" id="health-status">Checking...</span>
+                            </div>
+                            <div class="stat">
+                                <span>Database:</span>
+                                <span class="stat-value" id="db-status">Checking...</span>
+                            </div>
+                            <div class="stat">
+                                <span>Email Service:</span>
+                                <span class="stat-value" id="email-status">Checking...</span>
+                            </div>
+                            <button class="btn btn-success" onclick="checkHealth()">Refresh Status</button>
+                        </div>
+                        <div class="card">
+                            <h3>Server Metrics</h3>
+                            <div class="stat">
+                                <span>CPU Usage:</span>
+                                <span class="stat-value">24%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Memory Usage:</span>
+                                <span class="stat-value">1.2GB / 4GB</span>
+                            </div>
+                            <div class="stat">
+                                <span>Disk Usage:</span>
+                                <span class="stat-value">45GB / 100GB</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analytics Section -->
+                <div id="analytics-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>Website Analytics</h3>
+                            <div class="stat">
+                                <span>Total Visitors:</span>
+                                <span class="stat-value" id="visitor-count">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Active Users:</span>
+                                <span class="stat-value" id="active-users">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Page Views:</span>
+                                <span class="stat-value" id="page-views">-</span>
+                            </div>
+                            <button class="btn btn-success" onclick="getAnalytics()">Load Analytics</button>
+                        </div>
+                        <div class="card">
+                            <h3>Traffic Sources</h3>
+                            <div class="stat">
+                                <span>Direct:</span>
+                                <span class="stat-value">45%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Search:</span>
+                                <span class="stat-value">32%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Social:</span>
+                                <span class="stat-value">23%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sales Section -->
+                <div id="sales-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>Sales Overview</h3>
+                            <div class="stat">
+                                <span>Total Sales:</span>
+                                <span class="stat-value" id="total-sales">$0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Monthly Revenue:</span>
+                                <span class="stat-value" id="monthly-revenue">$0</span>
+                            </div>
+                            <div class="stat">
+                                <span>Conversion Rate:</span>
+                                <span class="stat-value" id="conversion-rate">0%</span>
+                            </div>
+                            <button class="btn btn-success" onclick="getSalesData()">Load Sales</button>
+                        </div>
+                        <div class="card">
+                            <h3>Sales Targets</h3>
+                            <div class="stat">
+                                <span>Monthly Target:</span>
+                                <span class="stat-value">$50,000</span>
+                            </div>
+                            <div class="stat">
+                                <span>Progress:</span>
+                                <span class="stat-value">68%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Remaining:</span>
+                                <span class="stat-value">$16,000</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Orders Section -->
+                <div id="orders-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>Order Status</h3>
+                            <div class="stat">
+                                <span>Pending Orders:</span>
+                                <span class="stat-value" id="pending-orders">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Processing Orders:</span>
+                                <span class="stat-value" id="processing-orders">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Completed Orders:</span>
+                                <span class="stat-value" id="completed-orders">-</span>
+                            </div>
+                            <button class="btn btn-success" onclick="getOrderStats()">Load Orders</button>
+                        </div>
+                        <div class="card">
+                            <h3>Order Details</h3>
+                            <div class="order-list" id="order-details">
+                                <div class="order-item">
+                                    <span class="order-id">#X001</span>
+                                    <span class="order-client">John Doe</span>
+                                    <span class="order-amount">$5,000</span>
+                                    <span class="order-status pending">Pending</span>
+                                </div>
+                                <div class="order-item">
+                                    <span class="order-id">#X002</span>
+                                    <span class="order-client">Jane Smith</span>
+                                    <span class="order-amount">$12,000</span>
+                                    <span class="order-status processing">Processing</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Users Section -->
+                <div id="users-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>User Activity</h3>
+                            <div class="stat">
+                                <span>New Users Today:</span>
+                                <span class="stat-value" id="new-users-today">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Returning Users:</span>
+                                <span class="stat-value" id="returning-users">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>User Engagement:</span>
+                                <span class="stat-value" id="user-engagement">-</span>
+                            </div>
+                            <button class="btn btn-success" onclick="getUserActivity()">Load Activity</button>
+                        </div>
+                        <div class="card">
+                            <h3>User Demographics</h3>
+                            <div class="stat">
+                                <span>Desktop Users:</span>
+                                <span class="stat-value">65%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Mobile Users:</span>
+                                <span class="stat-value">35%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Average Session:</span>
+                                <span class="stat-value">3m 42s</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Forms Section -->
+                <div id="forms-section" class="section">
+                    <div class="section-grid">
+                        <div class="card">
+                            <h3>Form Submissions</h3>
+                            <div class="stat">
+                                <span>Total Contacts:</span>
+                                <span class="stat-value" id="contact-count">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Total Resumes:</span>
+                                <span class="stat-value" id="resume-count">-</span>
+                            </div>
+                            <div class="stat">
+                                <span>Total Projects:</span>
+                                <span class="stat-value" id="project-count">-</span>
+                            </div>
+                            <button class="btn btn-success" onclick="getStats()">Load Stats</button>
+                        </div>
+                        <div class="card">
+                            <h3>Form Performance</h3>
+                            <div class="stat">
+                                <span>Contact Form Rate:</span>
+                                <span class="stat-value">12%</span>
+                            </div>
+                            <div class="stat">
+                                <span>Resume Submissions:</span>
+                                <span class="stat-value">8 this week</span>
+                            </div>
+                            <div class="stat">
+                                <span>Project Inquiries:</span>
+                                <span class="stat-value">5 this week</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Activity Section -->
+                <div id="activity-section" class="section">
+                    <div class="activity-container">
+                        <div class="activity-group">
+                            <h3>Recent Orders</h3>
+                            <div class="activity-list" id="recent-orders">
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Order #X001 - Website Development</span>
+                                        <span class="activity-meta">John Doe • $5,000 • 2 hours ago</span>
+                                    </div>
+                                    <span class="activity-status pending">Pending</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Order #X002 - Mobile App</span>
+                                        <span class="activity-meta">Jane Smith • $12,000 • 5 hours ago</span>
+                                    </div>
+                                    <span class="activity-status processing">Processing</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Order #X003 - AI Integration</span>
+                                        <span class="activity-meta">Tech Corp • $25,000 • 1 day ago</span>
+                                    </div>
+                                    <span class="activity-status completed">Completed</span>
+                                </div>
+                            </div>
+                            <button class="btn" onclick="loadRecentOrders()">Load More Orders</button>
+                        </div>
+
+                        <div class="activity-group">
+                            <h3>Recent Form Submissions</h3>
+                            <div class="activity-list" id="recent-submissions">
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Contact Form - Project Inquiry</span>
+                                        <span class="activity-meta">alex@startup.com • 30 minutes ago</span>
+                                    </div>
+                                    <span class="activity-status new">New</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Resume Submission - Frontend Developer</span>
+                                        <span class="activity-meta">sarah.dev@email.com • 1 hour ago</span>
+                                    </div>
+                                    <span class="activity-status new">New</span>
+                                </div>
+                                <div class="activity-item">
+                                    <div class="activity-info">
+                                        <span class="activity-title">Project Proposal - E-commerce Platform</span>
+                                        <span class="activity-meta">mike@retailco.com • 3 hours ago</span>
+                                    </div>
+                                    <span class="activity-status reviewed">Reviewed</span>
+                                </div>
+                            </div>
+                            <button class="btn" onclick="loadRecentSubmissions()">Load More Submissions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- API Testing Section -->
+                <div id="api-testing-section" class="section">
+                    <div class="test-container">
+                        <div class="test-group">
+                            <h3>Test Contact Form</h3>
+                            <form class="test-form" id="contact-form">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    <input type="text" name="firstName" value="John" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    <input type="text" name="lastName" value="Doe" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" name="email" value="john.doe@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Company:</label>
+                                    <input type="text" name="company" value="Tech Corp">
+                                </div>
+                                <div class="form-group">
+                                    <label>Message:</label>
+                                    <textarea name="message" required>Hello, I would like to discuss a potential project with your team.</textarea>
+                                </div>
+                                <button type="submit" class="btn">Submit Contact Form</button>
+                            </form>
+                            <div id="contact-result" class="result" style="display: none;"></div>
+                        </div>
+                        
+                        <div class="test-group">
+                            <h3>Test Project Submission</h3>
+                            <form class="test-form" id="project-form">
+                                <div class="form-group">
+                                    <label>First Name:</label>
+                                    <input type="text" name="firstName" value="Jane" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Last Name:</label>
+                                    <input type="text" name="lastName" value="Smith" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Email:</label>
+                                    <input type="email" name="email" value="jane.smith@example.com" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project Title:</label>
+                                    <input type="text" name="projectTitle" value="E-commerce Platform" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project Description:</label>
+                                    <textarea name="projectDescription" required>We need a full-stack e-commerce platform with user authentication, product catalog, shopping cart, and payment integration.</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Project Type:</label>
+                                    <select name="projectType" required>
+                                        <option value="web-app">Web App</option>
+                                        <option value="mobile-app">Mobile App</option>
+                                        <option value="ai-solution">AI Solution</option>
+                                        <option value="platform">Platform</option>
+                                        <option value="integration">Integration</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Budget:</label>
+                                    <select name="budget">
+                                        <option value="not-specified">Not Specified</option>
+                                        <option value="under-10k">Under $10k</option>
+                                        <option value="10k-25k">$10k - $25k</option>
+                                        <option value="25k-50k">$25k - $50k</option>
+                                        <option value="50k-100k">$50k - $100k</option>
+                                        <option value="100k-plus">$100k+</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn">Submit Project</button>
+                            </form>
+                            <div id="project-result" class="result" style="display: none;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Process | PeakTech Innovation & Technology Solutions</title>
+    <title>Our Process | X TECH Innovation & Technology Solutions</title>
     
     <!-- CSS Files -->
     <link rel="stylesheet" href="../../css/styles.css">
@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../../css/responsive.css">
     <link rel="stylesheet" href="process.css">
     <link rel="stylesheet" href="process-nav-fix.css">
+    <link rel="stylesheet" href="project-modal.css">
 </head>
 <body>
     <!-- Navigation -->
@@ -18,13 +19,13 @@
         <div class="nav-container">
             <div class="nav-wrapper">
                 <a href="#" class="logo">
-                    PEAKTECH
+                    X TECH
                 </a>
                 <div class="nav-links">
                     <a href="../../index.html#about">About us</a>
                     <a href="../../css/section/work.html">Work</a>
                     <a href="#" class="active">Process</a>
-                    <a href="../../index.html#apps">Apps</a>
+                    <a href="app.html">Apps</a>
                     <a href="career.html">Careers</a>
                     <a href="../../index.html#contact" class="cta-button">Get in touch</a>
                 </div>
@@ -334,10 +335,140 @@
             <div class="cta-content">
                 <h2>Ready to Start Your Project?</h2>
                 <p>Let's discuss how we can bring your ideas to life with our proven development process.</p>
-                <a href="#contact" class="cta-button">Start Your Project</a>
+                <a href="#" class="cta-button" id="start-project-btn">Start Your Project</a>
             </div>
         </div>
     </section>
+
+    <!-- Project Inquiry Modal (Apple Style) -->
+    <div id="project-modal" class="project-modal">
+      <div class="project-modal-backdrop"></div>
+      <div class="project-modal-container">
+        <div class="project-modal-content">
+          <button class="close-project-modal">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18 6L6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          
+          <div class="project-modal-header">
+            <h2>Start Your Project</h2>
+            <p>Tell us about your project, and we'll help bring your vision to life.</p>
+          </div>
+          
+          <form id="project-inquiry-form" class="project-inquiry-form">
+            <!-- Personal Info Section -->
+            <div class="form-section">
+              <h3>Your Information</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="name">Full Name</label>
+                  <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                  <label for="email">Email Address</label>
+                  <input type="email" id="email" name="email" required>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="company">Company</label>
+                  <input type="text" id="company" name="company">
+                </div>
+                <div class="form-group">
+                  <label for="phone">Phone</label>
+                  <input type="tel" id="phone" name="phone">
+                </div>
+              </div>
+            </div>
+            
+            <!-- Project Details Section -->
+            <div class="form-section">
+              <h3>Project Details</h3>
+              <div class="form-group project-type-group">
+                <label>Project Type</label>
+                <div class="project-type-options">
+                  <div class="project-type-option">
+                    <input type="radio" id="type-mobile" name="project-type" value="Mobile App">
+                    <label for="type-mobile">
+                      <div class="option-icon">📱</div>
+                      <div class="option-text">Mobile App</div>
+                    </label>
+                  </div>
+                  <div class="project-type-option">
+                    <input type="radio" id="type-web" name="project-type" value="Website">
+                    <label for="type-web">
+                      <div class="option-icon">🖥️</div>
+                      <div class="option-text">Website</div>
+                    </label>
+                  </div>
+                  <div class="project-type-option">
+                    <input type="radio" id="type-ai" name="project-type" value="AI Solution">
+                    <label for="type-ai">
+                      <div class="option-icon">🧠</div>
+                      <div class="option-text">AI Solution</div>
+                    </label>
+                  </div>
+                  <div class="project-type-option">
+                    <input type="radio" id="type-ux" name="project-type" value="UI/UX Design">
+                    <label for="type-ux">
+                      <div class="option-icon">🎨</div>
+                      <div class="option-text">UI/UX Design</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="budget">Budget Range</label>
+                  <select id="budget" name="budget" required>
+                    <option value="" disabled selected>Select budget</option>
+                    <option value="Under $10,000">Under $10,000</option>
+                    <option value="$10,000 - $25,000">$10,000 - $25,000</option>
+                    <option value="$25,000 - $50,000">$25,000 - $50,000</option>
+                    <option value="$50,000 - $100,000">$50,000 - $100,000</option>
+                    <option value="$100,000+">$100,000+</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label for="timeline">Timeline</label>
+                  <select id="timeline" name="timeline" required>
+                    <option value="" disabled selected>Select timeline</option>
+                    <option value="Less than 1 month">Less than 1 month</option>
+                    <option value="1-3 months">1-3 months</option>
+                    <option value="3-6 months">3-6 months</option>
+                    <option value="6+ months">6+ months</option>
+                  </select>
+                </div>
+              </div>
+              
+              <div class="form-group">
+                <label for="project-desc">Project Description</label>
+                <textarea id="project-desc" name="project-desc" rows="4" placeholder="Tell us more about your project goals and requirements..."></textarea>
+              </div>
+            </div>
+            
+            <div class="form-actions">
+              <button type="submit" class="submit-project-btn">Submit Inquiry</button>
+            </div>
+          </form>
+          
+          <!-- Success Message (hidden initially) -->
+          <div class="success-message" style="display: none;">
+            <div class="success-icon">
+              <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22 11.08V12C21.9988 14.1564 21.3005 16.2547 20.0093 17.9818C18.7182 19.709 16.9033 20.9725 14.8354 21.5839C12.7674 22.1953 10.5573 22.1219 8.53447 21.3746C6.51168 20.6273 4.78465 19.2461 3.61096 17.4371C2.43727 15.628 1.87979 13.4881 2.02168 11.3363C2.16356 9.18455 2.99721 7.13631 4.39828 5.49706C5.79935 3.85781 7.69279 2.71537 9.79619 2.24013C11.8996 1.7649 14.1003 1.98232 16.07 2.85999" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M22 4L12 14.01L9 11.01" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Thanks for reaching out!</h3>
+            <p>We've received your project inquiry and will get back to you within 1-2 business days to discuss next steps.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- JavaScript Files -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"></script>
@@ -359,7 +490,103 @@
             backgroundColor: 0x000000
           });
         }
+
+        // Project Modal Functionality
+        const startProjectBtn = document.getElementById('start-project-btn');
+        const projectModal = document.getElementById('project-modal');
+        const closeModalBtn = document.querySelector('.close-project-modal');
+        const modalBackdrop = document.querySelector('.project-modal-backdrop');
+        const projectForm = document.getElementById('project-inquiry-form');
+        const successMessage = document.querySelector('.success-message');
+        
+        // Open modal
+        if (startProjectBtn) {
+          startProjectBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            projectModal.classList.add('active');
+          });
+        }
+        
+        // Close modal functions
+        function closeModal() {
+          projectModal.classList.remove('active');
+          setTimeout(() => {
+            document.body.style.overflow = ''; // Re-enable scrolling
+            // Reset form if it was showing success
+            if (successMessage.style.display === 'block') {
+              successMessage.style.display = 'none';
+              projectForm.style.display = 'flex';
+              projectForm.reset();
+            }
+          }, 300);
+        }
+        
+        // Close with X button
+        if (closeModalBtn) {
+          closeModalBtn.addEventListener('click', closeModal);
+        }
+        
+        // Close with backdrop click
+        if (modalBackdrop) {
+          modalBackdrop.addEventListener('click', closeModal);
+        }
+        
+        // Close with ESC key
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && projectModal.classList.contains('active')) {
+            closeModal();
+          }
+        });
+        
+        // Form submission
+        if (projectForm) {
+          projectForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Here you would typically send the data to your server
+            // For now, we'll just show a success message
+            
+            // Simulate sending data
+            const formData = new FormData(projectForm);
+            console.log('Form data would be sent:', Object.fromEntries(formData));
+            
+            // Show success message with animation
+            projectForm.style.display = 'none';
+            successMessage.style.display = 'block';
+            
+            // Close modal automatically after 4 seconds
+            setTimeout(closeModal, 4000);
+          });
+        }
+        
+        // Fancy animation for project type selection
+        const projectTypeOptions = document.querySelectorAll('.project-type-option input');
+        projectTypeOptions.forEach(option => {
+          option.addEventListener('change', function() {
+            const label = this.nextElementSibling;
+            
+            // Add a pulse effect when selected
+            if (this.checked) {
+              label.style.animation = 'none';
+              setTimeout(() => {
+                label.style.animation = 'pulse 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+              }, 10);
+            }
+          });
+        });
       });
+      
+      // Add pulse animation keyframes
+      document.head.insertAdjacentHTML('beforeend', `
+        <style>
+          @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+          }
+        </style>
+      `);
     </script>
 </body>
 </html>

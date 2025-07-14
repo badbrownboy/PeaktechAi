@@ -69,8 +69,7 @@ function initSectionFadeIn() {
       section.style.transitionDelay = `${i * 0.05}s`;
       observer.observe(section);
     });
-  }
-  
+}
 
 function createExpertiseCircles() {
     const container = document.querySelector('.expertise-circles');
@@ -117,18 +116,6 @@ function parallaxExpertiseArc() {
     });
 }
 
-// Initialize all animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    initServiceCardAnimations();
-    initSectionFadeIn();
-    initTestimonialSlider();    
-});
-
-// Optional: Add loading animation
-window.addEventListener('load', function() {
-    document.body.classList.add('loaded');
-});
-
 function initTestimonialSlider() {
     const slides = document.querySelectorAll('.testimonial-slide');
     const dots = document.querySelectorAll('.testimonial-dot');
@@ -172,3 +159,112 @@ function initTestimonialSlider() {
     });
     showSlide(current);
 }
+
+// Initialize Vanta.js Globe background
+function initVantaGlobe() {
+    if (window.VANTA) {
+        VANTA.GLOBE({
+            el: "#vanta-sections-bg",
+            mouseControls: true,
+            touchControls: true,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.0,
+            scaleMobile: 1.0,
+            color: 0x8b5cf6,
+            color2: 0x8b5cf6,
+            backgroundColor: 0x000000
+        });
+    }
+}
+
+// Partners section animation
+function initPartnersAnimation() {
+    const partnersSection = document.querySelector('.partners');
+    if (!partnersSection) return;
+
+    const observerOptions = {
+        threshold: 0.2,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const partnerLogos = entry.target.querySelectorAll('.partner-logo');
+                partnerLogos.forEach((logo, index) => {
+                    // Remove any existing animation classes
+                    logo.classList.remove('animate-in');
+                    // Add animation class with delay
+                    setTimeout(() => {
+                        logo.classList.add('animate-in');
+                    }, index * 100);
+                });
+            }
+        });
+    }, observerOptions);
+
+    observer.observe(partnersSection);
+}
+
+// Initialize all animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    initServiceCardAnimations();
+    initSectionFadeIn();
+    initTestimonialSlider();
+    
+    // Initialize Vanta.js Globe
+    initVantaGlobe();
+    
+    // ONLY handle internal anchor links for smooth scrolling (do NOT catch external links)
+    document.querySelectorAll('nav a').forEach(link => {
+        const href = link.getAttribute('href');
+        // Only add smooth scroll for links that start with "#" and are NOT just "#"
+        if (href && href.startsWith('#') && href.length > 1) {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetSection = document.querySelector(href);
+                if (targetSection) {
+                    const navHeight = 100; // Account for fixed nav
+                    const targetPosition = targetSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    // Use requestAnimationFrame for smoother scrolling
+                    const startPosition = window.pageYOffset;
+                    const distance = targetPosition - startPosition;
+                    const duration = 800; // Smooth duration
+                    let startTime = null;
+                    
+                    function smoothScroll(currentTime) {
+                        if (startTime === null) startTime = currentTime;
+                        const timeElapsed = currentTime - startTime;
+                        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
+                        window.scrollTo(0, run);
+                        if (timeElapsed < duration) requestAnimationFrame(smoothScroll);
+                    }
+                    
+                    function easeInOutQuad(t, b, c, d) {
+                        t /= d / 2;
+                        if (t < 1) return c / 2 * t * t + b;
+                        t--;
+                        return -c / 2 * (t * (t - 2) - 1) + b;
+                    }
+                    
+                    requestAnimationFrame(smoothScroll);
+                }
+            });
+        }
+        // For all other links (like app.html), do NOT prevent default!
+    });
+    
+    // Initialize other animations
+    animateBlob();
+    parallaxBlob();
+    createExpertiseCircles();
+    parallaxExpertiseArc();
+    initPartnersAnimation();
+});
+
+// Optional: Add loading animation
+window.addEventListener('load', function() {
+    document.body.classList.add('loaded');
+});
